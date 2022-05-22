@@ -1,3 +1,6 @@
+import datetime
+import pytz
+
 from django.db import models
 
 
@@ -28,3 +31,31 @@ class Visit(models.Model):
                 if self.leaved_at else 'not leaved'
             )
         )
+
+    def get_duration(self):
+        uts3_time_entered_at = self.entered_at.astimezone(pytz.timezone('Europe/Moscow'))
+        if self.leaved_at:
+            uts3_time_leaved_at = self.leaved_at.astimezone(pytz.timezone('Europe/Moscow'))
+            visit_duration = uts3_time_leaved_at - uts3_time_entered_at
+        else:
+            time_now = datetime.datetime.now()
+            uts3_time_now = time_now.astimezone(pytz.timezone('Europe/Moscow'))
+            visit_duration = uts3_time_now - uts3_time_entered_at
+        return uts3_time_entered_at, visit_duration
+
+
+def format_duration(duration):
+    duration_seconds = duration.seconds
+    duration_hours = duration_seconds // 3600
+    duration_minutes = (duration_seconds % 3600) // 60
+    str_time = f'{duration_hours} ч, {duration_minutes} мин'
+    return str_time
+
+
+def is_visit_long(duration):
+    duration_seconds = duration.seconds
+    duration_hours = duration_seconds // 3600
+    if duration_hours < 1:
+        return False
+    else:
+        return True
