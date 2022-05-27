@@ -5,12 +5,12 @@ from django.shortcuts import render
 
 
 def storage_information_view(request):
-    in_vault = Visit.objects.filter(leaved_at=None)
+    non_closed_visits_serialized = Visit.objects.filter(leaved_at=None)
     non_closed_visits = []
-    for visit in in_vault:
-        entered_time, visit_duration = Visit.get_duration(visit)
+    for non_closed_visit in non_closed_visits_serialized:
+        entered_time, visit_duration = non_closed_visit.get_duration()
         formated_duration = format_duration(visit_duration)
-        who_entered = visit.passcard
+        who_entered = non_closed_visit.passcard
 
         non_closed_visits.append(
             {
@@ -20,6 +20,6 @@ def storage_information_view(request):
             }
         )
     context = {
-        'non_closed_visits': non_closed_visits,  # не закрытые посещения
+        'non_closed_visits': non_closed_visits,
     }
     return render(request, 'storage_information.html', context)
