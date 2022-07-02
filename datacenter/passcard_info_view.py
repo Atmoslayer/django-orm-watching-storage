@@ -5,8 +5,8 @@ from django.shortcuts import render
 
 
 def passcard_info_view(request, passcode):
-    passcard_object = Passcard.objects.filter(is_active=True, passcode=passcode)
-    passcard = passcard_object[0]
+    passcard_objects = Passcard.objects.filter(is_active=True, passcode=passcode)
+    passcard = passcard_objects[0]
     this_passcard_visits_serialized = []
     passcard_visits = Visit.objects.filter(passcard=passcard)
 
