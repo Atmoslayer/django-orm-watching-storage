@@ -1,28 +1,25 @@
 import os
 from dotenv import load_dotenv
+from distutils.util import strtobool
 load_dotenv()
 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'checkpoint.devman.org',
-        'PORT': '5434',
-        'NAME': 'checkpoint',
-        'USER': 'guard',
-        'PASSWORD': 'osim5',
+        'ENGINE': os.getenv('ENGINE'),
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT'),
+        'NAME': os.getenv('NAME'),
+        'USER': os.getenv('USER'),
+        'PASSWORD': os.getenv('PASSWORD'),
     }
 }
 
-INSTALLED_APPS = ['datacenter']
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-SECRET_KEY = os.getenv('REPLACE_ME')
+DEBUG = bool(strtobool(os.getenv('DEBUG', default=False)))
 
-DEBUG = os.getenv('DEBUG')
-
-ROOT_URLCONF = os.getenv('ROOT_URLCONF')
-
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default=['*'])
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,11 +33,11 @@ TEMPLATES = [
 
 LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = 'Europe/Moscow'
-
-USE_L10N = os.getenv('USE_L10N')
-USE_TZ = os.getenv('USE_TZ')
-DEFAULT_AUTO_FIELD = os.getenv('DEFAULT_AUTO_FIELD')
-
+ROOT_URLCONF = 'project.urls'
+USE_L10N = True
+USE_TZ = True
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+INSTALLED_APPS = ['datacenter']
 
 
 

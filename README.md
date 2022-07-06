@@ -9,15 +9,16 @@
 
 Проект содержит переменные окружения для настроек БД. Пример заполненного файла:
 ```angular2html
-SECRET_KEY = 'REPLACE_ME'
-DEBUG = False
-ROOT_URLCONF = 'project.urls'
-ALLOWED_HOSTS = ['*']
-USE_L10N = True
-USE_TZ = True
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+ENGINE=django.db.backends.postgresql_psycopg2
+HOST=checkpoint.devman.org
+PORT=1234
+NAME=checkpoint
+USER=guard
+PASSWORD=atms1
+SECRET_KEY=REPLACE_ME
+DEBUG=False
+ALLOWED_HOSTS=['*']
 ```
-
 Python3 должен быть уже установлен. 
 Затем используйте `pip` (или `pip3`, есть конфликт с Python2) для установки зависимостей:
 ```
@@ -27,7 +28,5 @@ pip install -r requirements.txt
 ```angular2html
 >>>python manage.py runserver 0.0.0.0:8000
 ```
-
 ### Цель проекта
-
 Код написан в образовательных целях на онлайн-курсе для веб-разработчиков [dvmn.org](https://dvmn.org/).
