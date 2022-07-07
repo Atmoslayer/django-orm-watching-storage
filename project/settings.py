@@ -19,7 +19,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = bool(strtobool(os.getenv('DEBUG', default=False)))
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
