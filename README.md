@@ -9,12 +9,12 @@
 
 Проект содержит переменные окружения для настроек БД. Пример заполненного файла:
 ```angular2html
-ENGINE=django.db.backends.postgresql_psycopg2
-HOST=checkpoint.devman.org
-PORT=1234
-NAME=checkpoint
-USER=guard
-PASSWORD=atms1
+DB_ENGINE=django.db.backends.postgresql_psycopg2
+DB_HOST=checkpoint.devman.org
+DB_PORT=1234
+DB_NAME=checkpoint
+DB_USER=guard
+DB_PASSWORD=atms1
 SECRET_KEY=REPLACE_ME
 DEBUG=False
 ALLOWED_HOSTS=['*']
